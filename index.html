@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Poste seu apoio | Vinicius Marchese 5588</title>
 <meta name="description" content="Escolha uma arte, escolha a rede e publique seu apoio a Vinicius Marchese, Deputado Federal, 5588.">
 <meta name="theme-color" content="#00081C">
@@ -15,7 +15,6 @@
 <style>
 :root{
   --fundo:#00081C;
-  --fundo-alto:#062060;
   --azul:#1247E5;
   --azul-claro:#3B76FF;
   --ambar:#FFB020;
@@ -24,192 +23,201 @@
   --suave:rgba(255,255,255,.66);
   --linha:rgba(255,255,255,.16);
   --painel:rgba(255,255,255,.055);
-  --raio:16px;
+  --vao:clamp(6px,1.3vh,13px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+html{height:100%}
 body{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  overscroll-behavior:none;
+  touch-action:manipulation;
   font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
   color:var(--branco);
-  background:var(--fundo);
-  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 88% 2%, rgba(18,71,229,.85) 0%, rgba(18,71,229,0) 58%),
+    radial-gradient(100% 80% at 2% 100%, rgba(6,32,96,.95) 0%, rgba(0,8,28,0) 60%),
+    linear-gradient(160deg,#001034 0%,#00081C 62%);
   -webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent;
 }
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(120% 90% at 88% 4%, rgba(18,71,229,.85) 0%, rgba(18,71,229,0) 58%),
-    radial-gradient(100% 80% at 4% 100%, rgba(6,32,96,.95) 0%, rgba(0,8,28,0) 60%),
-    linear-gradient(160deg,#001034 0%,#00081C 62%);
-  z-index:-1;
-}
 .tela{
-  height:100dvh;
+  height:100%;
+  min-height:0;
   display:grid;
   grid-template-rows:auto minmax(0,1fr) auto;
-  gap:clamp(8px,1.4vh,16px);
-  padding:clamp(10px,2.2vh,20px) clamp(12px,3vw,32px) clamp(8px,1.6vh,16px);
-  max-width:1240px;
+  gap:var(--vao);
+  padding:max(10px,env(safe-area-inset-top)) clamp(12px,3.4vw,30px) max(8px,env(safe-area-inset-bottom));
+  padding-top:clamp(10px,1.8vh,18px);
+  padding-bottom:calc(env(safe-area-inset-bottom) + clamp(8px,1.4vh,16px));
+  max-width:1220px;
   margin:0 auto;
 }
+
 /* topo */
-.topo{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
-.marca .selo{
-  width:34px;height:34px;border-radius:10px;flex:0 0 auto;
+.topo{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:0}
+.marca{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;min-width:0}
+.selo{
+  width:clamp(28px,4.6vh,34px);height:clamp(28px,4.6vh,34px);border-radius:9px;flex:0 0 auto;
   background:linear-gradient(140deg,var(--ambar),var(--ambar-escuro));
-  color:#00133F;font-weight:800;font-size:19px;
+  color:#00133F;font-weight:800;font-size:clamp(15px,2.6vh,19px);
   display:grid;place-items:center;
 }
-.marca b{display:block;font-size:clamp(14px,2.4vw,17px);font-weight:800;letter-spacing:.2px;line-height:1.05}
+.marca b{display:block;font-size:clamp(13px,2.1vh,17px);font-weight:800;line-height:1.05;white-space:nowrap}
 .marca b i{font-style:normal;color:var(--ambar)}
-.marca span{display:block;font-size:11px;color:var(--suave);font-weight:500;line-height:1.3}
-.numero-topo{
-  font-weight:800;font-size:clamp(20px,4.6vw,30px);letter-spacing:1px;
-  color:var(--ambar);line-height:1;
-}
+.marca small{display:block;font-size:clamp(9px,1.4vh,11px);color:var(--suave);font-weight:500;line-height:1.3;white-space:nowrap}
+.numero-topo{font-weight:800;font-size:clamp(19px,3.6vh,30px);color:var(--ambar);line-height:1;letter-spacing:.5px}
+
 /* corpo */
-.corpo{display:grid;gap:clamp(10px,2vw,22px);min-height:0}
-@media (min-width:900px){.corpo{grid-template-columns:minmax(0,.85fr) minmax(360px,1fr);align-items:stretch}}
-.palco{
-  min-height:0;display:flex;align-items:center;justify-content:center;position:relative;
-}
+.corpo{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:var(--vao);min-height:0}
+.palco{min-height:0;display:flex;align-items:center;justify-content:center}
 .palco img{
-  max-height:100%;max-width:100%;height:auto;width:auto;object-fit:contain;
-  border-radius:14px;
-  box-shadow:0 22px 60px rgba(0,0,0,.5);
-  background:rgba(255,255,255,.04);
+  max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;
+  border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.5);background:rgba(255,255,255,.04);
 }
-.etiqueta-palco{
-  position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;
-  background:rgba(0,8,28,.86);border:1px solid var(--linha);
-  padding:3px 12px;border-radius:999px;font-size:11px;color:var(--suave);
-  white-space:nowrap;backdrop-filter:blur(6px);
-}
-@media (max-width:899px){.etiqueta-palco{display:none}}
+
 /* painel */
 .painel{
-  background:var(--painel);
-  border:1px solid var(--linha);
-  border-radius:var(--raio);
-  padding:clamp(10px,1.8vh,18px) clamp(12px,2.2vw,20px);
-  display:flex;flex-direction:column;gap:clamp(8px,1.5vh,14px);
-  min-height:0;overflow:auto;scrollbar-width:none;
+  background:var(--painel);border:1px solid var(--linha);border-radius:15px;
+  padding:clamp(9px,1.5vh,17px) clamp(11px,2.4vw,18px);
+  display:grid;gap:var(--vao);align-content:start;
 }
-.painel::-webkit-scrollbar{display:none}
-.bloco{display:flex;flex-direction:column;gap:7px}
-.rotulo{font-size:12px;font-weight:600;color:var(--suave);letter-spacing:.2px}
-.rotulo b{color:var(--branco);font-weight:600}
-.linha-opcoes{display:flex;gap:7px;flex-wrap:wrap}
+.bloco{display:grid;gap:5px;min-width:0}
+.rotulo{
+  font-size:clamp(10px,1.5vh,12px);font-weight:600;color:var(--suave);
+  display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+}
+.rotulo em{font-style:normal;color:var(--branco);font-weight:500;font-size:.92em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:58%;text-align:right}
+
+.grade-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.grade-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
 .opcao{
-  flex:1 1 0;min-width:0;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:9px 8px;border-radius:11px;cursor:pointer;
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--linha);
-  color:var(--suave);font-family:inherit;font-size:12.5px;font-weight:600;
-  transition:background .16s ease,border-color .16s ease,color .16s ease;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:clamp(6px,1.1vh,10px) 4px;border-radius:10px;cursor:pointer;min-width:0;
+  background:rgba(255,255,255,.05);border:1px solid var(--linha);
+  color:var(--suave);font-family:inherit;font-size:clamp(9.5px,1.4vh,12px);font-weight:600;
+  line-height:1.1;transition:background .16s ease,border-color .16s ease,color .16s ease;
 }
-.opcao svg{width:15px;height:15px;flex:0 0 auto}
+.opcao span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.opcao svg{width:clamp(14px,2.2vh,17px);height:clamp(14px,2.2vh,17px);flex:0 0 auto}
 .opcao:hover{background:rgba(255,255,255,.1);color:var(--branco)}
 .opcao[aria-pressed="true"]{
-  background:linear-gradient(140deg,var(--azul),#0B32A8);
-  border-color:var(--azul-claro);color:var(--branco);
+  background:linear-gradient(140deg,var(--azul),#0B32A8);border-color:var(--azul-claro);color:var(--branco);
 }
-.opcao[aria-disabled="true"]{opacity:.32;cursor:not-allowed}
+.opcao[aria-disabled="true"]{opacity:.3;cursor:not-allowed}
 .opcao[aria-disabled="true"]:hover{background:rgba(255,255,255,.05);color:var(--suave)}
-.tiras{display:flex;gap:8px;flex-wrap:wrap}
+.grade-2 .opcao{flex-direction:row;padding:clamp(7px,1.2vh,10px) 6px}
+
+.tiras{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}
 .tira{
-  position:relative;border:2px solid transparent;border-radius:11px;padding:0;
-  background:none;cursor:pointer;line-height:0;overflow:hidden;
-  transition:border-color .16s ease,transform .16s ease;
+  position:relative;border:2px solid transparent;border-radius:10px;padding:0;
+  background:none;cursor:pointer;line-height:0;overflow:hidden;min-width:0;
+  transition:border-color .16s ease;
 }
-.tira img{width:56px;height:70px;object-fit:cover;border-radius:9px;display:block}
-.tira:hover{transform:translateY(-2px)}
+.tira img{width:100%;height:clamp(46px,8vh,72px);object-fit:cover;border-radius:8px;display:block}
 .tira[aria-pressed="true"]{border-color:var(--ambar)}
-.tira[aria-pressed="true"]::after{
-  content:"";position:absolute;inset:0;border-radius:9px;
-  box-shadow:inset 0 0 0 2px rgba(0,8,28,.7);
-}
+
 select,textarea{
   width:100%;font-family:inherit;color:var(--branco);
-  background:rgba(0,8,28,.55);
-  border:1px solid var(--linha);border-radius:11px;
-  padding:9px 11px;font-size:13px;
+  background:rgba(0,8,28,.55);border:1px solid var(--linha);border-radius:10px;
+  padding:8px 10px;font-size:16px;
 }
-select{appearance:none;cursor:pointer;font-weight:500;
+select{
+  appearance:none;cursor:pointer;font-weight:500;height:clamp(34px,5vh,42px);padding-block:0;
   background-image:linear-gradient(45deg,transparent 50%,var(--suave) 50%),linear-gradient(135deg,var(--suave) 50%,transparent 50%);
-  background-position:calc(100% - 18px) 18px,calc(100% - 13px) 18px;
+  background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;
   background-size:5px 5px,5px 5px;background-repeat:no-repeat;
 }
 select option{background:#00133F;color:#fff}
-textarea{resize:none;line-height:1.45;min-height:62px}
+textarea{resize:none;line-height:1.4;height:clamp(44px,7.4vh,66px)}
 textarea:read-only{color:var(--suave)}
+@media (min-width:900px){select,textarea{font-size:13px}}
 :focus-visible{outline:2px solid var(--ambar);outline-offset:2px}
-.acoes{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+
+.acoes{display:grid;gap:6px}
 .principal{
   width:100%;border:none;cursor:pointer;font-family:inherit;
   background:linear-gradient(135deg,var(--ambar),var(--ambar-escuro));
-  color:#00133F;font-weight:800;font-size:15.5px;letter-spacing:.2px;
-  padding:14px 16px;border-radius:13px;
-  box-shadow:0 12px 28px rgba(255,176,32,.24);
-  transition:transform .14s ease,box-shadow .14s ease;
+  color:#00133F;font-weight:800;font-size:clamp(14px,2.1vh,16px);
+  height:clamp(42px,6.4vh,54px);border-radius:12px;
+  box-shadow:0 10px 26px rgba(255,176,32,.22);
+  transition:transform .14s ease;
 }
-.principal:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(255,176,32,.32)}
+.principal:hover{transform:translateY(-1px)}
 .principal:active{transform:translateY(1px)}
-.secundarias{display:flex;gap:8px}
 .secundaria{
-  flex:1;background:transparent;border:1px solid var(--linha);
-  color:var(--suave);font-family:inherit;font-size:12.5px;font-weight:600;
-  padding:9px;border-radius:11px;cursor:pointer;
+  background:transparent;border:1px solid var(--linha);color:var(--suave);
+  font-family:inherit;font-size:clamp(10px,1.5vh,12.5px);font-weight:600;
+  height:clamp(30px,4.4vh,38px);border-radius:10px;cursor:pointer;min-width:0;
   transition:color .16s ease,border-color .16s ease;
 }
 .secundaria:hover{color:var(--branco);border-color:rgba(255,255,255,.4)}
-.aviso{font-size:11.5px;color:var(--suave);min-height:15px;line-height:1.35}
+.aviso{
+  font-size:clamp(9.5px,1.4vh,11.5px);color:var(--suave);line-height:1.3;
+  min-height:1.3em;overflow:hidden;
+}
 .aviso.ok{color:var(--ambar)}
+
 /* rodape */
 .rodape{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  font-size:10.5px;color:rgba(255,255,255,.42);flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:clamp(8.5px,1.2vh,10.5px);color:rgba(255,255,255,.4);min-height:0;
 }
-.rodape a{color:rgba(255,255,255,.62);text-decoration:none}
+.rodape a{color:rgba(255,255,255,.6);text-decoration:none;white-space:nowrap}
 .rodape a:hover{color:var(--ambar)}
+
+/* telas largas */
+@media (min-width:900px){
+  .corpo{grid-template-columns:minmax(0,1fr) 372px;grid-template-rows:minmax(0,1fr);align-items:stretch}
+  .painel{align-content:center}
+  .opcao{flex-direction:row;font-size:12.5px}
+}
+/* celular deitado */
+@media (max-height:520px) and (min-width:560px) and (max-width:899px){
+  .corpo{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+  .painel{align-content:center}
+  .marca small,.rodape{display:none}
+}
+/* telas baixas: aperta o painel para sobrar imagem */
+@media (max-height:700px){
+  :root{--vao:6px}
+  .bloco{gap:4px}
+  .painel{padding:9px 11px}
+}
+@media (max-height:600px){
+  .rodape span{display:none}
+  .tira img{height:clamp(40px,7vh,54px)}
+}
+
 /* passo a passo */
 .cortina{
-  position:fixed;inset:0;background:rgba(0,4,16,.78);
-  display:none;align-items:center;justify-content:center;padding:18px;z-index:20;
-  backdrop-filter:blur(4px);
+  position:fixed;inset:0;background:rgba(0,4,16,.8);display:none;
+  align-items:center;justify-content:center;padding:16px;z-index:20;backdrop-filter:blur(4px);
 }
 .cortina.aberta{display:flex}
 .caixa{
-  width:min(430px,100%);max-height:86dvh;overflow:auto;
-  background:#031436;border:1px solid var(--linha);border-radius:18px;
-  padding:22px;box-shadow:0 30px 70px rgba(0,0,0,.6);
+  width:min(420px,100%);max-height:84dvh;overflow:auto;
+  background:#031436;border:1px solid var(--linha);border-radius:16px;padding:20px;
+  box-shadow:0 26px 60px rgba(0,0,0,.6);
 }
-.caixa h2{font-size:17px;font-weight:700;margin-bottom:4px}
-.caixa p.intro{font-size:12.5px;color:var(--suave);margin-bottom:16px;line-height:1.5}
-.passo{display:flex;gap:11px;margin-bottom:13px}
+.caixa h2{font-size:16px;font-weight:700;margin-bottom:4px}
+.caixa p.intro{font-size:12px;color:var(--suave);margin-bottom:14px;line-height:1.5}
+.passo{display:flex;gap:10px;margin-bottom:12px}
 .passo .n{
-  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
-  background:var(--ambar);color:#00133F;font-size:12px;font-weight:800;
-  display:grid;place-items:center;margin-top:1px;
+  flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:var(--ambar);
+  color:#00133F;font-size:11.5px;font-weight:800;display:grid;place-items:center;margin-top:1px;
 }
-.passo p{font-size:13px;line-height:1.5}
-.caixa .fechar{
-  width:100%;margin-top:6px;border:none;cursor:pointer;font-family:inherit;
-  background:var(--azul);color:#fff;font-weight:700;font-size:14px;
-  padding:12px;border-radius:12px;
+.passo p{font-size:12.5px;line-height:1.5}
+.fechar{
+  width:100%;margin-top:4px;border:none;cursor:pointer;font-family:inherit;
+  background:var(--azul);color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:11px;
 }
-.caixa .fechar:hover{background:var(--azul-claro)}
-@media (max-width:899px){
-  .tira img{width:52px;height:65px}
-  .painel{gap:9px;padding:12px}
-  textarea{min-height:54px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.fechar:hover{background:var(--azul-claro)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -220,7 +228,7 @@ textarea:read-only{color:var(--suave)}
       <span class="selo">V</span>
       <span>
         <b><i>Vinicius</i> Marchese</b>
-        <span>Deputado Federal por São Paulo</span>
+        <small>Deputado Federal por São Paulo</small>
       </span>
     </a>
     <div class="numero-topo">5588</div>
@@ -229,34 +237,33 @@ textarea:read-only{color:var(--suave)}
   <main class="corpo">
     <section class="palco">
       <img id="preview" src="" alt="Arte selecionada para publicação">
-      <span class="etiqueta-palco" id="etiquetaPalco"></span>
     </section>
 
     <section class="painel">
       <div class="bloco">
-        <span class="rotulo">1. Onde você quer postar</span>
-        <div class="linha-opcoes" id="redes" role="group" aria-label="Escolha a rede social"></div>
+        <span class="rotulo">1. Onde postar</span>
+        <div class="grade-4" id="redes" role="group" aria-label="Escolha a rede social"></div>
       </div>
 
       <div class="bloco">
         <span class="rotulo">2. Tipo de postagem</span>
-        <div class="linha-opcoes" id="tipos" role="group" aria-label="Escolha o tipo de postagem"></div>
+        <div class="grade-2" id="tipos" role="group" aria-label="Escolha o tipo de postagem"></div>
       </div>
 
       <div class="bloco">
-        <span class="rotulo">3. Arte</span>
+        <span class="rotulo">3. Arte <em id="nomeArte"></em></span>
         <div class="tiras" id="tiras" role="group" aria-label="Escolha a arte"></div>
       </div>
 
       <div class="bloco">
-        <span class="rotulo">4. Texto que vai na postagem</span>
+        <span class="rotulo">4. Texto da postagem</span>
         <select id="seletorTexto" aria-label="Escolha o texto"></select>
-        <textarea id="campoTexto" rows="2" aria-label="Texto da postagem" readonly></textarea>
+        <textarea id="campoTexto" aria-label="Texto da postagem" readonly></textarea>
       </div>
 
       <div class="acoes">
         <button class="principal" id="botaoPostar" type="button">Fazer postagem</button>
-        <div class="secundarias">
+        <div class="grade-2">
           <button class="secundaria" id="botaoBaixar" type="button">Baixar imagem</button>
           <button class="secundaria" id="botaoCopiar" type="button">Copiar texto</button>
         </div>
@@ -288,41 +295,50 @@ textarea:read-only{color:var(--suave)}
   var TEXTOS = [{"rotulo": "Apoio direto", "texto": "Eu voto 5588, @viniciusmarchese para Deputado Federal! #Vinicius5588"}, {"rotulo": "Engenharia e gestão", "texto": "Meu voto para Deputado Federal é 5588, @viniciusmarchese. A engenharia de quem planeja e a gestão de quem faz, agora no Congresso Nacional. #Vinicius5588"}, {"rotulo": "Chamada para amigos", "texto": "Se você também quer São Paulo bem representado, vote 5588. @viniciusmarchese para Deputado Federal. Espalha aí! #Vinicius5588"}];
   var SITE = "https://viniciusmarchese.com.br/";
   var HASHTAG = "#Vinicius5588";
+  var PERFIL = "@viniciusmarchese";
 
   var REDES = {
     instagram:{
       nome:"Instagram",
       tipos:["feed","stories"],
+      levaImagemPorColagem:false,
       icone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
-      url:function(){ return "https://www.instagram.com/"; },
-      onde:"a aba do Instagram que abriu"
+      web:function(){ return "https://www.instagram.com/"; },
+      app:function(){ return "instagram://app"; },
+      onde:"a aba do Instagram"
     },
     facebook:{
       nome:"Facebook",
       tipos:["feed","stories"],
+      levaImagemPorColagem:true,
       icone:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V7.2c0-.9.2-1.3 1.4-1.3H17V3h-2.6C11.5 3 10.5 4.4 10.5 6.9V9H8.5v3h2V21h3.5v-9h2.6l.4-3H14z"/></svg>',
-      url:function(t){ return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SITE) + "&quote=" + encodeURIComponent(t); },
+      web:function(t){ return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SITE) + "&quote=" + encodeURIComponent(t); },
+      app:function(){ return "fb://facewebmodal"; },
       onde:"a janela do Facebook"
     },
     tiktok:{
       nome:"TikTok",
       tipos:["stories"],
+      levaImagemPorColagem:false,
       icone:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2 1.7 3.4 3.5 3.6v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.4 5.9-5.6 5.9C7.5 20 5 17.6 5 14.5s2.6-5.5 5.9-5.4v2.7c-.3-.1-.6-.1-.9-.1-1.6 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8c1.6 0 2.7-1.1 2.7-2.9V3h3.8z"/></svg>',
-      url:function(){ return "https://www.tiktok.com/upload"; },
-      onde:"a aba de upload do TikTok"
+      web:function(){ return "https://www.tiktok.com/tiktokstudio/upload?from=upload"; },
+      app:function(){ return "snssdk1233://"; },
+      onde:"a aba de envio do TikTok"
     },
     x:{
       nome:"X",
       tipos:["feed"],
+      levaImagemPorColagem:true,
       icone:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-6l-4.3-5.7L6.4 21H3.3l7-8-6.6-10h6.1l3.9 5.2L17.5 3zm-1.1 16h1.7L7.7 4.8H5.9L16.4 19z"/></svg>',
-      url:function(t){ return "https://x.com/intent/post?text=" + encodeURIComponent(t) + "&url=" + encodeURIComponent(SITE); },
+      web:function(t){ return "https://x.com/intent/post?text=" + encodeURIComponent(t) + "&url=" + encodeURIComponent(SITE); },
+      app:function(t){ return "twitter://post?message=" + encodeURIComponent(t); },
       onde:"a janela do X"
     }
   };
 
   var TIPOS = {
-    feed:{ nome:"Feed", descricao:"formato quadrado alto, aparece no perfil" },
-    stories:{ nome:"Stories", descricao:"formato de tela cheia, some em 24 horas" }
+    feed:{ nome:"Feed", descricao:"aparece no perfil e na linha do tempo" },
+    stories:{ nome:"Stories", descricao:"tela cheia, sai do ar em 24 horas" }
   };
 
   var estado = { rede:"instagram", tipo:"feed", arte:null, texto:0, proprio:"" };
@@ -332,7 +348,7 @@ textarea:read-only{color:var(--suave)}
     tipos:document.getElementById("tipos"),
     tiras:document.getElementById("tiras"),
     preview:document.getElementById("preview"),
-    etiqueta:document.getElementById("etiquetaPalco"),
+    nomeArte:document.getElementById("nomeArte"),
     seletor:document.getElementById("seletorTexto"),
     campo:document.getElementById("campoTexto"),
     aviso:document.getElementById("aviso"),
@@ -354,15 +370,32 @@ textarea:read-only{color:var(--suave)}
     return new Blob([bytes], {type:mime});
   }
 
+  function arquivoDe(arte){
+    try{ return new File([arte.blob], arte.nome, {type:arte.mime}); }catch(e){ return null; }
+  }
+
+  function podeCompartilharArquivo(arte){
+    var f = arquivoDe(arte);
+    return !!(f && navigator.share && navigator.canShare && navigator.canShare({files:[f]}));
+  }
+
   function artesDoTipo(tipo){
     return ARTES.filter(function(a){ return a.formato === tipo; });
+  }
+
+  function arteAtual(){
+    for(var i=0;i<ARTES.length;i++){ if(ARTES[i].id === estado.arte){ return ARTES[i]; } }
+    return artesDoTipo(estado.tipo)[0] || ARTES[0];
   }
 
   function textoAtual(){
     var base = estado.texto === -1 ? estado.proprio : TEXTOS[estado.texto].texto;
     base = (base || "").trim();
+    if(base.toLowerCase().indexOf(PERFIL.toLowerCase()) === -1){
+      base = base ? base + " " + PERFIL : PERFIL;
+    }
     if(base.toLowerCase().indexOf(HASHTAG.toLowerCase()) === -1){
-      base = base ? base + " " + HASHTAG : HASHTAG;
+      base = base + " " + HASHTAG;
     }
     return base;
   }
@@ -385,7 +418,7 @@ textarea:read-only{color:var(--suave)}
         estado.rede = chave;
         if(r.tipos.indexOf(estado.tipo) === -1){ trocarTipo(r.tipos[0], true); }
         desenhar();
-        avisar("Rede escolhida: " + r.nome + ".");
+        avisar("Vai postar no " + r.nome + ".");
       });
       el.redes.appendChild(b);
     });
@@ -395,29 +428,26 @@ textarea:read-only{color:var(--suave)}
     estado.tipo = tipo;
     var lista = artesDoTipo(tipo);
     if(lista.length){ estado.arte = lista[0].id; }
-    if(!silencioso){ avisar("Formato " + TIPOS[tipo].nome + ", " + TIPOS[tipo].descricao + "."); }
+    if(!silencioso){ avisar(TIPOS[tipo].nome + ", " + TIPOS[tipo].descricao + "."); }
   }
 
   function montarTipos(){
     el.tipos.innerHTML = "";
     Object.keys(TIPOS).forEach(function(chave){
-      var permitido = REDES[estado.rede].tipos.indexOf(chave) !== -1 && artesDoTipo(chave).length > 0;
+      var temArte = artesDoTipo(chave).length > 0;
+      var permitido = REDES[estado.rede].tipos.indexOf(chave) !== -1 && temArte;
       var b = document.createElement("button");
       b.type = "button";
       b.className = "opcao";
-      b.textContent = TIPOS[chave].nome;
+      b.innerHTML = "<span>" + TIPOS[chave].nome + "</span>";
       b.setAttribute("aria-pressed", estado.tipo === chave ? "true" : "false");
       if(!permitido){
         b.setAttribute("aria-disabled","true");
-        b.title = artesDoTipo(chave).length
-          ? "O " + REDES[estado.rede].nome + " não usa esse formato"
-          : "Nenhuma arte cadastrada nesse formato";
+        b.title = temArte ? "O " + REDES[estado.rede].nome + " não usa esse formato" : "Nenhuma arte nesse formato";
       }
       b.addEventListener("click", function(){
         if(!permitido){
-          avisar(artesDoTipo(chave).length
-            ? "O " + REDES[estado.rede].nome + " não trabalha com " + TIPOS[chave].nome + "."
-            : "Ainda não há arte nesse formato.");
+          avisar(temArte ? "O " + REDES[estado.rede].nome + " não trabalha com " + TIPOS[chave].nome + "." : "Ainda não há arte nesse formato.");
           return;
         }
         trocarTipo(chave);
@@ -429,8 +459,7 @@ textarea:read-only{color:var(--suave)}
 
   function montarTiras(){
     el.tiras.innerHTML = "";
-    var lista = artesDoTipo(estado.tipo);
-    lista.forEach(function(a){
+    artesDoTipo(estado.tipo).forEach(function(a){
       var b = document.createElement("button");
       b.type = "button";
       b.className = "tira";
@@ -444,7 +473,6 @@ textarea:read-only{color:var(--suave)}
       b.addEventListener("click", function(){
         estado.arte = a.id;
         desenhar();
-        avisar("Arte escolhida: " + a.titulo + ".");
       });
       el.tiras.appendChild(b);
     });
@@ -467,10 +495,10 @@ textarea:read-only{color:var(--suave)}
       estado.texto = parseInt(el.seletor.value, 10);
       if(estado.texto === -1){
         el.campo.readOnly = false;
-        el.campo.value = estado.proprio || TEXTOS[0].texto;
-        estado.proprio = el.campo.value;
+        estado.proprio = estado.proprio || TEXTOS[0].texto;
+        el.campo.value = estado.proprio;
         el.campo.focus();
-        avisar("Escreva o que quiser. A hashtag " + HASHTAG + " entra sozinha.");
+        avisar("Escreva o que quiser. O perfil e a hashtag entram sozinhos.");
       }else{
         el.campo.readOnly = true;
         avisar("");
@@ -483,11 +511,6 @@ textarea:read-only{color:var(--suave)}
     });
   }
 
-  function arteAtual(){
-    for(var i=0;i<ARTES.length;i++){ if(ARTES[i].id === estado.arte){ return ARTES[i]; } }
-    return artesDoTipo(estado.tipo)[0] || ARTES[0];
-  }
-
   function desenhar(){
     montarRedes();
     montarTipos();
@@ -496,12 +519,13 @@ textarea:read-only{color:var(--suave)}
     estado.arte = a.id;
     el.preview.src = a.dados;
     el.preview.alt = a.titulo;
-    el.etiqueta.textContent = a.titulo + ", " + TIPOS[a.formato].nome;
+    el.nomeArte.textContent = a.titulo;
     el.seletor.value = String(estado.texto);
     el.campo.value = estado.texto === -1 ? (estado.proprio || "") : TEXTOS[estado.texto].texto;
   }
 
-  function copiar(txt){
+  /* area de transferencia */
+  function copiarTexto(txt){
     var pronto = false;
     try{
       var caixa = document.createElement("textarea");
@@ -521,10 +545,36 @@ textarea:read-only{color:var(--suave)}
     return pronto;
   }
 
-  function baixar(a){
+  function paraPng(arte){
+    return new Promise(function(ok, falha){
+      var img = new Image();
+      img.onload = function(){
+        var tela = document.createElement("canvas");
+        tela.width = img.naturalWidth;
+        tela.height = img.naturalHeight;
+        tela.getContext("2d").drawImage(img, 0, 0);
+        tela.toBlob(function(b){ b ? ok(b) : falha(new Error("sem png")); }, "image/png");
+      };
+      img.onerror = falha;
+      img.src = arte.dados;
+    });
+  }
+
+  function copiarImagem(arte){
+    if(!(window.ClipboardItem && navigator.clipboard && navigator.clipboard.write)){
+      return Promise.resolve(false);
+    }
+    try{
+      var item = new window.ClipboardItem({"image/png": paraPng(arte)});
+      return navigator.clipboard.write([item]).then(function(){ return true; })
+        .catch(function(){ return false; });
+    }catch(e){ return Promise.resolve(false); }
+  }
+
+  function baixar(arte){
     var link = document.createElement("a");
-    link.href = a.dados;
-    link.download = a.nome;
+    link.href = arte.dados;
+    link.download = arte.nome;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -546,48 +596,71 @@ textarea:read-only{color:var(--suave)}
 
   function fechar(){ el.cortina.classList.remove("aberta"); }
 
-  function fluxoComputador(rede, arte, texto){
-    baixar(arte);
-    window.open(REDES[rede].url(texto), "_blank", "noopener");
-    var passos = [
-      "A imagem foi salva na pasta de downloads do seu aparelho e o texto já está copiado.",
-      "Vá até " + REDES[rede].onde + " e comece uma nova publicação em " + TIPOS[estado.tipo].nome + ".",
-      "Selecione a imagem baixada e cole o texto na legenda com Ctrl+V, ou toque e segure para colar."
-    ];
-    if(rede === "x" || rede === "facebook"){
-      passos[2] = "O texto já vem escrito. Anexe a imagem baixada e publique.";
+  /* publicacao */
+  function fluxoNativo(arte, texto){
+    var arquivo = arquivoDe(arte);
+    copiarTexto(texto);
+    navigator.share({ files:[arquivo], text:texto, title:"Vinicius Marchese 5588" })
+      .then(function(){
+        abrirPassos(
+          "Imagem enviada para o aplicativo",
+          "A foto já foi para o compositor. Faltam segundos.",
+          [
+            "Confirme o formato " + TIPOS[estado.tipo].nome + " se o aplicativo perguntar.",
+            "Toque na legenda e cole o texto, que já está copiado no seu aparelho.",
+            "Publique. O perfil " + PERFIL + " e a hashtag " + HASHTAG + " já estão no texto."
+          ]
+        );
+      })
+      .catch(function(erro){
+        if(erro && erro.name === "AbortError"){ avisar("Publicação cancelada. A arte continua aqui."); return; }
+        fluxoNavegador(arte, texto);
+      });
+  }
+
+  function fluxoNavegador(arte, texto){
+    var rede = REDES[estado.rede];
+    var colaImagem = rede.levaImagemPorColagem;
+    var janela = window.open(rede.web(texto), "_blank", "noopener");
+
+    if(colaImagem){
+      copiarImagem(arte).then(function(deu){
+        if(!deu){ copiarTexto(texto); }
+        baixar(arte);
+        abrirPassos(
+          "Falta um Ctrl+V",
+          deu ? "O texto já foi preenchido e a imagem está na área de transferência."
+              : "O texto já foi preenchido e a imagem foi baixada.",
+          [
+            "Vá até " + rede.onde + ", que já abriu com o texto escrito.",
+            deu ? "Clique no campo da publicação e aperte Ctrl+V para colar a imagem."
+                : "Clique em adicionar foto e escolha a imagem que acabou de baixar.",
+            "Confira o texto e publique."
+          ]
+        );
+      });
+    }else{
+      copiarTexto(texto);
+      baixar(arte);
+      abrirPassos(
+        "Falta pouco",
+        "A imagem foi baixada e o texto já está copiado.",
+        [
+          "Vá até " + rede.onde + " e comece uma publicação em " + TIPOS[estado.tipo].nome + ".",
+          "Escolha a imagem que acabou de baixar, ela é a primeira da sua pasta de downloads.",
+          "Cole o texto na legenda com Ctrl+V e publique."
+        ]
+      );
     }
-    abrirPassos("Falta pouco", "Duas coisas já foram feitas para você.", passos);
+
+    if(!janela){ avisar("O navegador bloqueou a nova aba. Libere as janelas para este site.", true); }
   }
 
   function publicar(){
     var arte = arteAtual();
     var texto = textoAtual();
-    copiar(texto);
-
-    var arquivo = null;
-    try{ arquivo = new File([arte.blob], arte.nome, {type:arte.mime}); }catch(e){ arquivo = null; }
-
-    if(arquivo && navigator.canShare && navigator.canShare({files:[arquivo]}) && navigator.share){
-      navigator.share({ files:[arquivo], text:texto })
-        .then(function(){
-          abrirPassos(
-            "Imagem enviada",
-            "Você escolheu o aplicativo. Agora é só finalizar por lá.",
-            [
-              "Se o aplicativo pedir, confirme o formato " + TIPOS[estado.tipo].nome + ".",
-              "Toque no campo de legenda e cole o texto, que já está copiado.",
-              "Publique e marque " + "@viniciusmarchese" + " para a campanha ver o seu apoio."
-            ]
-          );
-        })
-        .catch(function(erro){
-          if(erro && erro.name === "AbortError"){ avisar("Publicação cancelada. A arte continua aqui."); return; }
-          fluxoComputador(estado.rede, arte, texto);
-        });
-      return;
-    }
-    fluxoComputador(estado.rede, arte, texto);
+    if(podeCompartilharArquivo(arte)){ fluxoNativo(arte, texto); }
+    else{ fluxoNavegador(arte, texto); }
   }
 
   document.getElementById("botaoPostar").addEventListener("click", publicar);
@@ -596,20 +669,21 @@ textarea:read-only{color:var(--suave)}
     avisar("Imagem salva na pasta de downloads.", true);
   });
   document.getElementById("botaoCopiar").addEventListener("click", function(){
-    avisar(copiar(textoAtual())
-      ? "Texto copiado, com a hashtag " + HASHTAG + "."
-      : "Não deu para copiar aqui. Selecione o texto e copie manualmente.", true);
+    avisar(copiarTexto(textoAtual())
+      ? "Texto copiado com " + PERFIL + " e " + HASHTAG + "."
+      : "Não deu para copiar. Selecione o texto e copie na mão.", true);
   });
   document.getElementById("botaoFechar").addEventListener("click", fechar);
   el.cortina.addEventListener("click", function(e){ if(e.target === el.cortina){ fechar(); } });
   document.addEventListener("keydown", function(e){ if(e.key === "Escape"){ fechar(); } });
+  window.addEventListener("resize", function(){ document.activeElement && document.activeElement.blur && null; });
 
   montarTextos();
   var inicial = artesDoTipo("feed").length ? "feed" : "stories";
   if(REDES[estado.rede].tipos.indexOf(inicial) === -1){ estado.rede = "instagram"; }
   trocarTipo(inicial, true);
   desenhar();
-  avisar("Escolha a arte e clique em fazer postagem.");
+  avisar("Escolha a arte e toque em fazer postagem.");
 })();
 </script>
 </body>
